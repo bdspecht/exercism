@@ -28,16 +28,16 @@ Function Get-BobResponse() {
         [string]$HeyBob
     )
 
-    if ($HeyBob -match "\S+\?(\s*)?") {
-        return 'Sure.'
-    }
-    elseif ($HeyBob -match "[A-Z](\!)?$") {
-        return 'Whoa, chill out!'
-    }
-    elseif ($HeyBob -match "[A-Z]+\s{1}?$") {
+    if ($HeyBob -cmatch "[A-Z]{2,}\?$") {
         return "Calm down, I know what I'm doing!"
     }
-    elseif ($HeyBob -match "^\s+$" -or $HeyBob -eq '') {
+    elseif ($HeyBob -cmatch "[A-Z]{2,}.*(\!)?$") {
+        return 'Whoa, chill out!'
+    }
+    elseif ($HeyBob -cmatch '\s*\?$(\s*)') {
+        return 'Sure.'
+    }
+    elseif ($HeyBob -cmatch "^\s+$" -or $HeyBob -eq '') {
         return 'Fine. Be that way!'
     }
     else {
